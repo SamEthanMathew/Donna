@@ -1,0 +1,32 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual Environment
+.venv/
+venv/
+env/
+
+# Data and Logs
+data/
+logs/
+*.log
+*.sqlite
+*.db
+
+# Temporary files
+*.swp
+.DS_Store
+
+# Cursor/IDE
+.cursor/
+.idea/
+.vscode/
+
+# Audio/Video artifacts
+*.wav
+*.mp3
+*.jpg
+*.png
+
