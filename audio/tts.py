@@ -29,7 +29,7 @@ class TextToSpeech:
     2. Voice cloning (XTTS v2) - clones a reference voice
     """
     
-    def __init__(self, voice_ref_path: Optional[str] = None, use_cuda: bool = True):
+    def __init__(self, voice_ref_path: Optional[str] = None, use_cuda: bool = False):
         """
         Initialize TTS engine.
         
@@ -116,4 +116,5 @@ if __name__ == "__main__":
     
     # Speak some text
     tts.speak("Hello! I am your Jetson agent, ready to assist you.")
+
 
