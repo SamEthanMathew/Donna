@@ -1,25 +1,52 @@
 import cv2
+import argparse
+from vision.face_detector import YuNetFaceDetector
+
+MODEL_PATH = "data/models/yunet.onnx"
+
+def draw_face(frame, face_row):
+    x, y, w, h = face_row[:4].astype(int)
+    score = float(face_row[4])
+
+    cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 2)
+    cv2.putText(
+        frame,
+        f"{score:.2f}",
+        (x, max(20, y - 10)),
+        cv2.FONT_HERSHEY_SIMPLEX,
+        0.6,
+        (0, 255, 0),
+        2
+    )
 
 def main():
-    # Open the camera explicitly via V4L2 (best for Jetson)
-    cap = cv2.VideoCapture("/dev/video1", cv2.CAP_V4L2)
+    parser = argparse.ArgumentParser(description="Run face detection on camera feed.")
+    parser.add_argument("--camera", type=int, default=1, help="Camera index (default: 0)")
+    args = parser.parse_args()
 
+    detector = YuNetFaceDetector(MODEL_PATH)
+
+    cap = cv2.VideoCapture(args.camera)
     if not cap.isOpened():
-        print("ERROR: Could not open /dev/video1")
-        return
+        raise RuntimeError(f"Could not open camera index {args.camera}")
 
-    print("Camera opened. Press 'q' to quit.")
+    print("Press 'q' to quit.")
 
     while True:
         ret, frame = cap.read()
         if not ret:
-            print("ERROR: Failed to grab frame")
             break
 
-        cv2.imshow("Jetson Camera Feed", frame)
+        faces = detector.detect(frame)
 
-        # Exit on 'q'
-        if cv2.waitKey(1) & 0xFF == ord('q'):
+        # Draw all faces
+        for face in faces:
+            draw_face(frame, face)
+
+        cv2.imshow("YuNet Face Detection", frame)
+
+        key = cv2.waitKey(1) & 0xFF
+        if key == ord('q'):
             break
 
     cap.release()
