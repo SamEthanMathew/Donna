@@ -1,0 +1,15 @@
+# Core dependencies for face recognition system
+opencv-python>=4.8.0
+numpy>=1.24.0
+Flask>=2.3.0
+Pillow>=10.0.0
+
+# For ONNX Runtime GPU on Jetson:
+# JetPack 5.1.2 (L4T R35.4.1) + Python 3.8
+# Install manually with:
+# pip install --extra-index-url https://pypi.nvidia.com onnxruntime-gpu
+# Or use CPU version for now:
+onnxruntime>=1.15.0
+
+# Additional utilities
+requests>=2.31.0
