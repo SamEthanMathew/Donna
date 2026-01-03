@@ -97,4 +97,72 @@ class MemoryStore:
             )
             conn.commit()
 
+    def get_relevant_memories(self, user_input: str, min_count: int = 3, max_count: int = 8) -> List[MemoryItem]:
+        """
+        Get top relevant memories for user input.
+        Prioritizes: preference > constraint > project > routine > goal > person > misc
+        Returns 3-8 memories max.
+        """
+        # Extract keywords from user input (simple tokenization)
+        tokens = [t.strip(".,!?").lower() for t in user_input.split() if len(t.strip(".,!?")) >= 4]
+        
+        # Category priority order
+        category_priority = {
+            "preference": 1,
+            "constraint": 2,
+            "project": 3,
+            "routine": 4,
+            "goal": 5,
+            "person": 6,
+            "misc": 7
+        }
+        
+        # Collect candidate memories
+        candidates = {}
+        used_ids = set()
+        
+        # Search for each token
+        for token in tokens[:8]:  # Limit token search
+            for mem in self.search_memories(token, limit=5):
+                if mem.id not in used_ids:
+                    priority = category_priority.get(mem.category, 99)
+                    # Score: lower priority number = higher priority
+                    score = priority * 1000 - mem.confidence * 100
+                    candidates[mem.id] = (score, mem)
+                    used_ids.add(mem.id)
+        
+        # Also get recent high-confidence memories from priority categories
+        with self._conn() as conn:
+            rows = conn.execute("""
+                SELECT id, key, value, category, confidence, created_at, updated_at, last_used_at
+                FROM memories
+                WHERE category IN ('preference', 'constraint', 'project')
+                ORDER BY confidence DESC, updated_at DESC
+                LIMIT ?
+            """, (max_count,)).fetchall()
+            
+            for row in rows:
+                mem = MemoryItem(*row)
+                if mem.id not in used_ids:
+                    priority = category_priority.get(mem.category, 99)
+                    score = priority * 1000 - mem.confidence * 100
+                    candidates[mem.id] = (score, mem)
+                    used_ids.add(mem.id)
+        
+        # Sort by score (lower = better) and take top N
+        sorted_memories = sorted(candidates.values(), key=lambda x: x[0])
+        selected = [mem for _, mem in sorted_memories[:max_count]]
+        
+        # Ensure we have at least min_count if available
+        if len(selected) < min_count and len(candidates) >= min_count:
+            # Add more from any category
+            remaining = [mem for _, mem in sorted_memories[max_count:]]
+            selected.extend(remaining[:min_count - len(selected)])
+        
+        # Mark as used
+        if selected:
+            self.mark_used([m.id for m in selected])
+        
+        return selected
+
 

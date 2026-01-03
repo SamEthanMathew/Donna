@@ -11,7 +11,15 @@ OLLAMA_URL = "http://localhost:11434"
 MODEL_NAME = "llama3.2:1b"
 
 # Keep last N conversation turns (user+assistant pairs).
-WORKING_MEMORY_TURNS = 10
+WORKING_MEMORY_TURNS = 5
+
+# Conversation management
+VERBATIM_TURNS = 4  # Keep last 4 turns verbatim
+SUMMARY_UPDATE_THRESHOLD = 6  # Update summary after N turns
+
+# Memory context limits
+MAX_MEMORY_CONTEXT = 8  # Max memories to inject
+MIN_MEMORY_CONTEXT = 3  # Min memories to inject
 
 # Guardrails
 MAX_USER_CHARS = 4000
