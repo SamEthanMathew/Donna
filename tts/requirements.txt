@@ -1,0 +1,12 @@
+# Piper TTS Module Requirements
+#
+# This module uses subprocess to call the Piper binary, so no Python
+# dependencies are required beyond the standard library.
+#
+# System dependencies (installed by setup.sh):
+# - alsa-utils (for aplay audio playback)
+# - wget (for downloading files)
+#
+# External binaries and models (installed by setup.sh):
+# - Piper aarch64 binary (in bin/piper/)
+# - Amy medium voice model (in models/)

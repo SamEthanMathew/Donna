@@ -44,3 +44,5 @@ def make_proactive_brief(now_local: datetime) -> str:
     return "User just appeared. It's evening. Ask what needs to get done tonight and keep it tight."
 
 
+
+

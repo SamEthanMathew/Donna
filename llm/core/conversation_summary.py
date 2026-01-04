@@ -96,3 +96,5 @@ Provide a concise summary in 5-10 bullet points:""".format(
             lines.append(f"{role.capitalize()}: {content}")
         return "\n".join(lines)
 
+
+
