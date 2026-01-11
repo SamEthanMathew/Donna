@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donna - Voice Assistant</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="header-content">
+                <div class="header-left">
+                    <h1>Donna</h1>
+                    <p class="subtitle">Your Voice Assistant</p>
+                </div>
+                <button id="addPersonButton" class="add-person-btn" title="Add New Person">
+                    <span class="add-icon">+</span>
+                    <span class="add-text">Add Person</span>
+                </button>
+            </div>
+        </header>
+
+        <!-- Top Section: Eyes (Full Width) -->
+        <div class="top-section">
+            <div class="eye-section">
+                <div id="eyeContainer" class="eye-container"></div>
+            </div>
+        </div>
+
+        <!-- Conversation Layer (Bottom, Full Width) -->
+        <div class="conversation-layer">
+            <div class="conversation-area" id="conversationArea">
+                <div class="message assistant-message">
+                    <div class="message-content">
+                        Hello! I'm Donna. You can type a message or use the voice button to speak with me.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Input Area -->
+            <div class="input-area">
+                <textarea 
+                    id="textInput" 
+                    placeholder="Type your message here..."
+                    rows="2"
+                ></textarea>
+                <div class="button-group">
+                    <button id="voiceButton" class="voice-btn" title="Voice Input">
+                        <span class="mic-icon">🎤</span>
+                    </button>
+                    <button id="sendButton" class="send-btn">Send</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Status -->
+        <div class="status" id="status"></div>
+    </div>
+
+    <!-- Web-Eye-Animation Library -->
+    <script src="/static/web-eye-animation.js"></script>
+    <script src="/static/person_modal.js"></script>
+    <script src="/static/app.js"></script>
+</body>
+</html>
+

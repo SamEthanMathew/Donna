@@ -7,6 +7,8 @@ Main application that orchestrates STT, TTS, LLM, and Vision modules.
 import sys
 import signal
 import time
+import argparse
+import threading
 from pathlib import Path
 
 # Add project root to path
@@ -161,12 +163,61 @@ def signal_handler(sig, frame):
     sys.exit(0)
 
 
+def start_web_server():
+    """Start the FastAPI web server."""
+    import uvicorn
+    from web.app import app
+    
+    print(f"\n[Web] Starting web server at http://{config.WEB_HOST}:{config.WEB_PORT}")
+    print(f"[Web] Open http://{config.WEB_HOST}:{config.WEB_PORT} in your browser")
+    
+    uvicorn.run(
+        app,
+        host=config.WEB_HOST,
+        port=config.WEB_PORT,
+        log_level=config.LOG_LEVEL.lower()
+    )
+
+
 def main():
     """Main entry point."""
     global app
     
+    # Parse command line arguments
+    parser = argparse.ArgumentParser(description="Donna Voice Assistant")
+    parser.add_argument(
+        "--web",
+        action="store_true",
+        help="Start web server instead of voice loop"
+    )
+    parser.add_argument(
+        "--mode",
+        choices=["voice", "web", "both"],
+        default="voice",
+        help="Operation mode: voice (default), web, or both"
+    )
+    
+    args = parser.parse_args()
+    
     # Register signal handler for graceful shutdown
     signal.signal(signal.SIGINT, signal_handler)
+    
+    # Web-only mode
+    if args.web or args.mode == "web":
+        if not config.WEB_ENABLED:
+            print("Web server is disabled in config. Set WEB_ENABLED=True to enable.")
+            sys.exit(1)
+        start_web_server()
+        return
+    
+    # Both mode: start web server in background thread
+    if args.mode == "both":
+        if config.WEB_ENABLED:
+            web_thread = threading.Thread(target=start_web_server, daemon=True)
+            web_thread.start()
+            print(f"\n[Web] Web server starting in background at http://{config.WEB_HOST}:{config.WEB_PORT}")
+        else:
+            print("[Web] Web server disabled in config")
     
     # Create and initialize app
     app = DonnaApp()

@@ -94,3 +94,16 @@ ASSISTANT_NAME = "Donna"
 LOG_LEVEL = "INFO"  # DEBUG, INFO, WARNING, ERROR
 LOG_INTERACTIONS = True  # Log all user interactions
 
+# ============================================================================
+# Web Server Configuration
+# ============================================================================
+WEB_HOST = "127.0.0.1"  # Localhost only
+WEB_PORT = 8000  # Web server port
+WEB_ENABLED = True  # Enable/disable web UI
+
+# ============================================================================
+# Emotion Detection Configuration
+# ============================================================================
+EMOTION_DETECTION_METHOD = "sentiment"  # Detection method: "sentiment" or "keyword"
+EMOTION_UPDATE_INTERVAL = 0.5  # Seconds between emotion updates during streaming
+
