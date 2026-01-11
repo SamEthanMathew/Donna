@@ -28,9 +28,21 @@ logs/
 .idea/
 .vscode/
 
+# Documentation/analysis files
+CODEBASE_ANALYSIS.md
+
 # Audio/Video artifacts
 *.wav
 *.mp3
 *.jpg
 *.png
+
+# Build dependencies (cloned during setup)
+stt/bin/whisper.cpp/
+tts/bin/piper/
+
+# Model files (downloaded during setup)
+stt/models/
+tts/models/
+vision/data/models/
 

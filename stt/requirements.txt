@@ -1,0 +1,16 @@
+# Whisper.cpp STT Module Requirements
+#
+# This module uses subprocess to call the whisper.cpp binary, so no Python
+# dependencies are required beyond the standard library.
+#
+# System dependencies (installed by setup.sh):
+# - cmake (build system)
+# - make (build tool)
+# - g++ (C++ compiler)
+# - ffmpeg (audio processing)
+# - libavcodec-dev, libavformat-dev, libavutil-dev (FFmpeg libraries)
+#
+# External binaries and models (installed by setup.sh):
+# - whisper.cpp binary (built from source in bin/whisper.cpp/build/bin/main)
+# - ggml-base.en.bin model (~142 MB in models/)
+

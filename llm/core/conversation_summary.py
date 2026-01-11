@@ -1,6 +1,17 @@
 from dataclasses import dataclass, field
 from typing import List, Dict
-from core.ollama_client import OllamaClient
+import sys
+from pathlib import Path
+
+# Support both relative and absolute imports
+try:
+    from core.ollama_client import OllamaClient
+except ImportError:
+    # Try absolute import from llm package
+    _llm_dir = Path(__file__).parent.parent
+    if str(_llm_dir.parent) not in sys.path:
+        sys.path.insert(0, str(_llm_dir.parent))
+    from llm.core.ollama_client import OllamaClient
 
 @dataclass
 class ConversationState:
