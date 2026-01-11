@@ -16,7 +16,6 @@ A fully offline, multi-modal voice assistant for NVIDIA Jetson devices with spee
 - [Development](#development)
 - [Troubleshooting](#troubleshooting)
 - [Contributing](#contributing)
-- [License](#license)
 - [Acknowledgments](#acknowledgments)
 
 ## Features
@@ -969,10 +968,6 @@ Contributions are welcome! Please follow these guidelines:
 - Test new features before submitting
 - Ensure existing functionality still works
 - Update documentation if needed
-
-## License
-
-[Specify your license here - e.g., MIT, Apache 2.0, etc.]
 
 ## Acknowledgments
 
