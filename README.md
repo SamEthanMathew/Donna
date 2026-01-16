@@ -22,14 +22,14 @@ A fully offline, multi-modal voice assistant for NVIDIA Jetson devices with spee
 
 ### Core Capabilities
 
-- **🎤 Voice Interaction**: Wake word detection ("Donna") with offline speech-to-text using Whisper.cpp
-- **🔊 Text-to-Speech**: Natural voice synthesis using Piper TTS with Amy medium voice
-- **🧠 Language Model**: Integration with Ollama for intelligent conversations
-- **👁️ Face Recognition**: Real-time person recognition with automatic greetings
-- **💾 Memory System**: Persistent memory storage with semantic retrieval
-- **🌐 Web Interface**: Modern web UI with animated eyes, emotion detection, and real-time streaming
-- **😊 Emotion Detection**: Automatic emotion detection from responses with animated eye expressions
-- **🔄 Proactive Conversations**: Intelligent proactive interactions based on person detection and time
+- **Voice Interaction**: Wake word detection ("Donna") with offline speech-to-text using Whisper.cpp
+- **Text-to-Speech**: Natural voice synthesis using Piper TTS with Amy medium voice
+- **Language Model**: Integration with Ollama for intelligent conversations
+- **Face Recognition**: Real-time person recognition with automatic greetings
+- **Memory System**: Persistent memory storage with semantic retrieval
+- **Web Interface**: Modern web UI with animated eyes, emotion detection, and real-time streaming
+- **Emotion Detection**: Automatic emotion detection from responses with animated eye expressions
+- **Proactive Conversations**: Intelligent proactive interactions based on person detection and time
 
 ### Web UI Features
 
