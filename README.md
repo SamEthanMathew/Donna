@@ -5,6 +5,7 @@ A fully offline, multi-modal voice assistant for NVIDIA Jetson devices with spee
 ## Table of Contents
 
 - [Features](#features)
+- [Next Steps](#next-steps)
 - [Architecture](#architecture)
 - [Prerequisites](#prerequisites)
 - [Installation](#installation)
@@ -39,6 +40,22 @@ A fully offline, multi-modal voice assistant for NVIDIA Jetson devices with spee
 - **Face Tracking**: Eyes follow detected faces in real-time
 - **Black & Gold Theme**: Professional, bold color scheme
 - **Responsive Design**: Adapts to screen size automatically
+
+## next-steps
+
+These are active areas that are not fully finished yet:
+
+### Web UI + Robot Interface
+- UI cleanup for robot interface (layout polish, controls, responsiveness, and overall UX)
+
+### Productivity Integrations
+- Google Calendar (GCal) integration with the LLM (event lookup, summaries, context injection)
+- Gmail integration with the LLM (email search/summarization, important-thread extraction)
+
+### Near-Term Improvements
+- Better setup ergonomics (one-command install, fewer manual steps)
+- Reliability hardening (timeouts, retries, graceful module degradation)
+- Performance tuning on Jetson (latency + resource usage)
 
 ## Architecture
 
